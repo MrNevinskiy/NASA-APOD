@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Astronomy Picture of the Day</string>
+    <string name="search">Search</string>
+    <string name="Date">date</string>
 </resources>
