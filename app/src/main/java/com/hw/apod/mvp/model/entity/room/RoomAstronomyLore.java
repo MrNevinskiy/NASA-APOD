@@ -17,7 +17,9 @@ public class RoomAstronomyLore {
     private String hdurl;
     private String url;
 
-    public RoomAstronomyLore(){}
+    public RoomAstronomyLore(){
+
+    }
 
     public RoomAstronomyLore(@NonNull String date, String title, String explanation, String hdurl, String url) {
         this.date = date;

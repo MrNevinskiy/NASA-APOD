@@ -7,5 +7,5 @@ import java.util.List;
 import io.reactivex.rxjava3.core.Single;
 
 public interface IAstronomyLoreRepo {
-    Single<List<AstronomyLore>> getLore(String date, String apiKey);
+    Single<List<AstronomyLore>> getLore(String date);
 }

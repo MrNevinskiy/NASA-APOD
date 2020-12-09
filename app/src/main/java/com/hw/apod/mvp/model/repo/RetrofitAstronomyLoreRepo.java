@@ -8,6 +8,7 @@ import com.hw.apod.mvp.model.network.INetworkStatus;
 import java.util.List;
 
 import io.reactivex.rxjava3.core.Single;
+import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class RetrofitAstronomyLoreRepo implements IAstronomyLoreRepo {
@@ -15,6 +16,7 @@ public class RetrofitAstronomyLoreRepo implements IAstronomyLoreRepo {
     private IDataSource api;
     private INetworkStatus status;
     final IAstronomyLoreCache cache;
+    private Disposable disposable = null;
 
     public RetrofitAstronomyLoreRepo(IDataSource api, INetworkStatus status, IAstronomyLoreCache cache) {
         this.api = api;
@@ -23,13 +25,13 @@ public class RetrofitAstronomyLoreRepo implements IAstronomyLoreRepo {
     }
 
     @Override
-    public Single<List<AstronomyLore>> getLore(String date, String apiKey) {
-        return status.isOnlineSingle().flatMap((isOnline) ->{
-            if(isOnline){
-                return api.loadLore(date,apiKey).flatMap((lore) ->{
+    public Single<List<AstronomyLore>> getLore(String date) {
+        return status.isOnlineSingle().flatMap((isOnline) -> {
+            if (isOnline) {
+                return api.loadLore(date).flatMap((lore) -> {
                     return cache.putAstronomyLore(lore).toSingleDefault(lore);
                 });
-            }else {
+            } else {
                 return cache.getAstronomyLore();
             }
         }).subscribeOn(Schedulers.io());
