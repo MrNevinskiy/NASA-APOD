@@ -15,7 +15,7 @@ public class ApiHolder {
         Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://api.nasa.gov/planetary/")
+                .baseUrl("https://api.nasa.gov/")
                 .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();

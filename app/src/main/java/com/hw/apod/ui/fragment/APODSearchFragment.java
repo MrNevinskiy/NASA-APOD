@@ -43,7 +43,7 @@ public class APODSearchFragment extends MvpAppCompatFragment implements SearchVi
 
     private View view;
 
-    private String date;
+    private String date = "2020-01-10";
 
     @InjectPresenter
     SearchPresenter detailPresenter;

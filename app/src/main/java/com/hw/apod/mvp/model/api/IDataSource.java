@@ -10,6 +10,6 @@ import retrofit2.http.Query;
 
 public interface IDataSource {
 
-    @GET("/apod")
+    @GET("planetary/apod")
     Single<List<AstronomyLore>> loadLore(@Query("api_key") String api_key, @Query("date") String date);
 }
