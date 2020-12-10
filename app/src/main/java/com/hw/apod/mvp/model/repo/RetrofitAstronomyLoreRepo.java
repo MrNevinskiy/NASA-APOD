@@ -25,10 +25,10 @@ public class RetrofitAstronomyLoreRepo implements IAstronomyLoreRepo {
     }
 
     @Override
-    public Single<List<AstronomyLore>> getLore(String date) {
+    public Single<List<AstronomyLore>> getLore(String api_key, String date) {
         return status.isOnlineSingle().flatMap((isOnline) -> {
             if (isOnline) {
-                return api.loadLore(date).flatMap((lore) -> {
+                return api.loadLore(api_key,date).flatMap((lore) -> {
                     return cache.putAstronomyLore(lore).toSingleDefault(lore);
                 });
             } else {

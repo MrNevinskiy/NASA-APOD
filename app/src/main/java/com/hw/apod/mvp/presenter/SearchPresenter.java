@@ -2,6 +2,7 @@ package com.hw.apod.mvp.presenter;
 
 import android.util.Log;
 
+import com.hw.apod.BuildConfig;
 import com.hw.apod.mvp.model.entity.AstronomyLore;
 import com.hw.apod.mvp.model.repo.IAstronomyLoreRepo;
 import com.hw.apod.mvp.presenter.list.ISearchListPresenter;
@@ -68,7 +69,8 @@ public class SearchPresenter extends MvpPresenter<SearchView> {
     }
 
     public void loadData(String date)  {
-        astronomyLoreRepo.getLore(date).observeOn(scheduler).subscribe(lores -> {
+        String api = BuildConfig.NASASecAPIKEY;
+        astronomyLoreRepo.getLore(api,date).observeOn(scheduler).subscribe(lores -> {
             dateListPresenter.lore.clear();
             dateListPresenter.lore.addAll(lores);
             getViewState().updateList();
