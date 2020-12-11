@@ -8,6 +8,6 @@ import io.reactivex.rxjava3.core.Completable;
 import io.reactivex.rxjava3.core.Single;
 
 public interface IAstronomyLoreCache {
-    Single<List<AstronomyLore>> getAstronomyLore();
-    Completable putAstronomyLore(List<AstronomyLore> astronomyLore);
+    Single<AstronomyLore> getAstronomyLore();
+    Completable putAstronomyLore(AstronomyLore astronomyLore);
 }

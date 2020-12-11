@@ -11,6 +11,7 @@ import com.hw.apod.mvp.view.list.SearchItemView;
 import com.hw.apod.ui.navigation.Screens;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import io.reactivex.rxjava3.core.Scheduler;
@@ -65,14 +66,14 @@ public class SearchPresenter extends MvpPresenter<SearchView> {
     @Override
     protected void onFirstViewAttach() {
         super.onFirstViewAttach();
+        loadData("20-20-20");
         getViewState().init();
     }
 
     public void loadData(String date) {
         Log.d(TAG, BuildConfig.NASASecAPIKEY + " - " + date);
         astronomyLoreRepo.getLore(BuildConfig.NASASecAPIKEY, date).observeOn(scheduler).subscribe(lores -> {
-            dateListPresenter.lore.clear();
-            dateListPresenter.lore.addAll(lores);
+            dateListPresenter.lore.addAll(Collections.singleton(lores));
             getViewState().updateList();
         }, (e) -> {
             Log.w(TAG, "Error" + e.getMessage());

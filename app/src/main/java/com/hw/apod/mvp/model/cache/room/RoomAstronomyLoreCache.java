@@ -6,6 +6,7 @@ import com.hw.apod.mvp.model.entity.room.Database;
 import com.hw.apod.mvp.model.entity.room.RoomAstronomyLore;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import io.reactivex.rxjava3.core.Completable;
@@ -22,42 +23,36 @@ public class RoomAstronomyLoreCache implements IAstronomyLoreCache {
 
 
     @Override
-    public Single<List<AstronomyLore>> getAstronomyLore() {
+    public Single<AstronomyLore> getAstronomyLore() {
         return Single.fromCallable(() -> {
-            List<RoomAstronomyLore> roomLore = db.loreDao().getAll();
+            RoomAstronomyLore roomLore = db.loreDao().getAll();
 
-            List<AstronomyLore> lore = new ArrayList<>();
+            AstronomyLore astronomyLore = new AstronomyLore(
+                    roomLore.getDate(),
+                    roomLore.getExplanation(),
+                    roomLore.getHdurl(),
+                    roomLore.getTitle(),
+                    roomLore.getUrl());
 
-            for (RoomAstronomyLore roomAstronomyLore : roomLore) {
-                AstronomyLore astronomyLore = new AstronomyLore(
-                        roomAstronomyLore.getDate(),
-                        roomAstronomyLore.getExplanation(),
-                        roomAstronomyLore.getHdurl(),
-                        roomAstronomyLore.getTitle(),
-                        roomAstronomyLore.getUrl());
-
-                lore.add(astronomyLore);
-            }
-
-            return lore;
+            return astronomyLore;
         });
     }
 
+
     @Override
-    public Completable putAstronomyLore(List<AstronomyLore> astronomyLore) {
+    public Completable putAstronomyLore(AstronomyLore astronomyLore) {
         return Completable.fromAction(() -> {
+
             List<RoomAstronomyLore> roomLore = new ArrayList<>();
 
-            for (AstronomyLore lore : astronomyLore) {
-                RoomAstronomyLore roomAstronomyLore = new RoomAstronomyLore(
-                        lore.getDate(),
-                        lore.getTitle(),
-                        lore.getExplanation(),
-                        lore.getHdurl(),
-                        lore.getUrl());
+            RoomAstronomyLore roomAstronomyLore = new RoomAstronomyLore(
+                    astronomyLore.getDate(),
+                    astronomyLore.getTitle(),
+                    astronomyLore.getExplanation(),
+                    astronomyLore.getHdurl(),
+                    astronomyLore.getUrl());
 
-                roomLore.add(roomAstronomyLore);
-            }
+            roomLore.add(roomAstronomyLore);
 
             db.loreDao().insert(roomLore);
 

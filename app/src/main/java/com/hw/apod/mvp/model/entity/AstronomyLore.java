@@ -4,17 +4,22 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
 public class AstronomyLore implements Parcelable {
-    
+    @SerializedName("date")
     @Expose private String date;
 
+    @SerializedName("explanation")
     @Expose private String explanation;
 
+    @SerializedName("hdurl")
     @Expose private String hdurl;
 
+    @SerializedName("title")
     @Expose private String title;
 
+    @SerializedName("url")
     @Expose private String url;
 
     public AstronomyLore(String date, String explanation, String hdurl, String title, String url) {
