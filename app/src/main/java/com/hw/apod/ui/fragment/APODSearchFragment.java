@@ -33,8 +33,6 @@ import ru.terrakok.cicerone.Router;
 
 public class APODSearchFragment extends MvpAppCompatFragment implements SearchView, BackButtonListener {
 
-    private String TAG = APODSearchFragment.class.getSimpleName();
-
     private Button searchButton;
     private CalendarView calendarView;
     private RecyclerView recyclerView;
@@ -43,7 +41,7 @@ public class APODSearchFragment extends MvpAppCompatFragment implements SearchVi
 
     private View view;
 
-    private String date = "2020-01-10";
+    private String date;
 
     @InjectPresenter
     SearchPresenter detailPresenter;

@@ -6,7 +6,6 @@ import com.hw.apod.mvp.model.entity.room.Database;
 import com.hw.apod.mvp.model.entity.room.RoomAstronomyLore;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import io.reactivex.rxjava3.core.Completable;

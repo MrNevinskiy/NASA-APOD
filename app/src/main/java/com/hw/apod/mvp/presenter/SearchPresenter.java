@@ -66,14 +66,21 @@ public class SearchPresenter extends MvpPresenter<SearchView> {
     @Override
     protected void onFirstViewAttach() {
         super.onFirstViewAttach();
-        loadData("20-20-20");
         getViewState().init();
+        loadCache();
+    }
+
+    public void loadCache(){
+        astronomyLoreRepo.getCache().observeOn(scheduler).subscribe(lore -> {
+            dateListPresenter.lore.addAll(Collections.singleton(lore));
+            getViewState().updateList();
+        });
     }
 
     public void loadData(String date) {
         Log.d(TAG, BuildConfig.NASASecAPIKEY + " - " + date);
-        astronomyLoreRepo.getLore(BuildConfig.NASASecAPIKEY, date).observeOn(scheduler).subscribe(lores -> {
-            dateListPresenter.lore.addAll(Collections.singleton(lores));
+        astronomyLoreRepo.getLore(BuildConfig.NASASecAPIKEY, date).observeOn(scheduler).subscribe(lore -> {
+            dateListPresenter.lore.addAll(Collections.singleton(lore));
             getViewState().updateList();
         }, (e) -> {
             Log.w(TAG, "Error" + e.getMessage());
