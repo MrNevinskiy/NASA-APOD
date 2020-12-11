@@ -30,9 +30,4 @@ public class RetrofitAstronomyLoreRepo implements IAstronomyLoreRepo {
             }
         }).subscribeOn(Schedulers.io());
     }
-
-    @Override
-    public Single<AstronomyLore>  getCache() {
-        return status.isOnlineSingle().flatMap((isOffline) -> cache.getAstronomyLore()).subscribeOn(Schedulers.io());
-    }
 }

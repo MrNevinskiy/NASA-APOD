@@ -67,14 +67,7 @@ public class SearchPresenter extends MvpPresenter<SearchView> {
     protected void onFirstViewAttach() {
         super.onFirstViewAttach();
         getViewState().init();
-        loadCache();
-    }
-
-    public void loadCache(){
-        astronomyLoreRepo.getCache().observeOn(scheduler).subscribe(lore -> {
-            dateListPresenter.lore.addAll(Collections.singleton(lore));
-            getViewState().updateList();
-        });
+        loadData(" ");
     }
 
     public void loadData(String date) {
