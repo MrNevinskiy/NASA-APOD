@@ -76,7 +76,7 @@ public class SearchPresenter extends MvpPresenter<SearchView> {
             dateListPresenter.lore.addAll(Collections.singleton(lore));
             getViewState().updateList();
         }, (e) -> {
-            Log.w(TAG, "Error " + e.getMessage());
+            Log.w(TAG, "Error" + e.getMessage());
         });
     }
 
