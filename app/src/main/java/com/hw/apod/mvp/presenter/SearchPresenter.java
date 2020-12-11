@@ -68,9 +68,9 @@ public class SearchPresenter extends MvpPresenter<SearchView> {
         getViewState().init();
     }
 
-    public void loadData(String date)  {
-        Log.d(TAG, date + "__" + BuildConfig.NASASecAPIKEY);
-        astronomyLoreRepo.getLore(BuildConfig.NASASecAPIKEY,date).observeOn(scheduler).subscribe(lores -> {
+    public void loadData(String date) {
+        Log.d(TAG, BuildConfig.NASASecAPIKEY + " - " + date);
+        astronomyLoreRepo.getLore(BuildConfig.NASASecAPIKEY, date).observeOn(scheduler).subscribe(lores -> {
             dateListPresenter.lore.clear();
             dateListPresenter.lore.addAll(lores);
             getViewState().updateList();
