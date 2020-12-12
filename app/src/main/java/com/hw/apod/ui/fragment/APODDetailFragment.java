@@ -16,7 +16,6 @@ import com.hw.apod.app.APODApplication;
 import com.hw.apod.mvp.model.entity.AstronomyLore;
 import com.hw.apod.mvp.presenter.DetailPresenter;
 import com.hw.apod.mvp.view.DetailView;
-import com.hw.apod.mvp.view.image.GlideImageLoader;
 import com.hw.apod.mvp.view.image.IImageLoader;
 import com.hw.apod.ui.BackButtonListener;
 
@@ -32,10 +31,8 @@ public class APODDetailFragment extends MvpAppCompatFragment implements DetailVi
 
     private View view;
 
-//    @Inject
-//    IImageLoader<ImageView> imageLoader;
-    private static IImageLoader<ImageView> imageLoader = new GlideImageLoader();
-
+    @Inject
+    IImageLoader<ImageView> imageLoader;
 
     private TextView tv_date;
     private TextView tv_title;
@@ -50,6 +47,10 @@ public class APODDetailFragment extends MvpAppCompatFragment implements DetailVi
     DetailPresenter apodDetailFragment() {
         final AstronomyLore astronomyLore = getArguments().getParcelable(ARG);
         return new DetailPresenter(astronomyLore);
+    }
+
+    APODDetailFragment(){
+        APODApplication.INSTANCE.initScreensSubcomponent().inject(this);
     }
 
     public static Fragment newInstance(AstronomyLore astronomyLore) {

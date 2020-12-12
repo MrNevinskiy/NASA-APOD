@@ -1,5 +1,7 @@
 package com.hw.apod.di.screens.module;
 
+
+import com.hw.apod.di.screens.ScreensScoup;
 import com.hw.apod.mvp.model.api.IDataSource;
 import com.hw.apod.mvp.model.cache.IAstronomyLoreCache;
 import com.hw.apod.mvp.model.cache.room.RoomAstronomyLoreCache;
@@ -19,6 +21,7 @@ public class ScreensModule {
         return new RoomAstronomyLoreCache(db);
     }
 
+    @ScreensScoup
     @Provides
     public IAstronomyLoreRepo astronomyLoreRepo(IDataSource api, INetworkStatus networkStatus, IAstronomyLoreCache astronomyLoreCache){
         return new RetrofitAstronomyLoreRepo(api,networkStatus,astronomyLoreCache);

@@ -12,7 +12,6 @@ import dagger.Provides;
 
 @Module
 public class CacheModule {
-
     @Singleton
     @Provides
     Database database() {

@@ -32,7 +32,6 @@ public class APODApplication extends Application {
         return INSTANCE;
     }
 
-
     public AppComponent getAppComponent() {
         return appComponent;
     }
@@ -46,7 +45,7 @@ public class APODApplication extends Application {
         }
 
         if (screensSubcomponent == null) {
-            ScreensSubcomponent screensSubcomponent = appComp.searchSubcomponent();
+            ScreensSubcomponent screensSubcomponent = appComp.screensSubcomponent();
             this.screensSubcomponent = screensSubcomponent;
         }
 

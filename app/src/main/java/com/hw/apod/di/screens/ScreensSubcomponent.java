@@ -1,6 +1,5 @@
 package com.hw.apod.di.screens;
 
-import com.hw.apod.di.screens.module.ImageModule;
 import com.hw.apod.di.screens.module.ScreensModule;
 import com.hw.apod.mvp.presenter.DetailPresenter;
 import com.hw.apod.mvp.presenter.SearchPresenter;
@@ -12,7 +11,6 @@ import dagger.Subcomponent;
 @Subcomponent(
         modules = {
                 ScreensModule.class,
-                ImageModule.class
         }
 )
 public interface ScreensSubcomponent {
