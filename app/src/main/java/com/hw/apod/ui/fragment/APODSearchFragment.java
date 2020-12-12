@@ -47,15 +47,6 @@ public class APODSearchFragment extends MvpAppCompatFragment implements SearchVi
     SearchPresenter detailPresenter;
 
     @ProvidePresenter
-    SearchPresenter apodDetailFragment(){
-        IAstronomyLoreRepo astronomyLoreRepo = new RetrofitAstronomyLoreRepo(
-                APODApplication.INSTANCE.getApi(),
-                new AndroidNetworkStatus(),
-                new RoomAstronomyLoreCache(Database.getInstance()));
-        Router router = APODApplication.getInstance().getRouter();
-        return new SearchPresenter(AndroidSchedulers.mainThread(), router, astronomyLoreRepo);
-    }
-
     public static APODSearchFragment getInstance(){
         APODSearchFragment fragment = new APODSearchFragment();
         return fragment;
@@ -87,6 +78,11 @@ public class APODSearchFragment extends MvpAppCompatFragment implements SearchVi
     @Override
     public void updateList() {
         adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void release() {
+        APODApplication.INSTANCE.releaseSearchSubcomponent();
     }
 
     public void initRV(){

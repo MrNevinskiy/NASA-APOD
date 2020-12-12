@@ -15,22 +15,27 @@ import com.hw.apod.R;
 import com.hw.apod.app.APODApplication;
 import com.hw.apod.mvp.model.entity.AstronomyLore;
 import com.hw.apod.mvp.presenter.DetailPresenter;
+import com.hw.apod.mvp.view.DetailView;
 import com.hw.apod.mvp.view.image.GlideImageLoader;
 import com.hw.apod.mvp.view.image.IImageLoader;
-import com.hw.apod.mvp.view.DetailView;
 import com.hw.apod.ui.BackButtonListener;
+
+import javax.inject.Inject;
 
 import moxy.MvpAppCompatFragment;
 import moxy.presenter.InjectPresenter;
 import moxy.presenter.ProvidePresenter;
-import ru.terrakok.cicerone.Router;
 
-public class APODDetailFragment extends MvpAppCompatFragment implements DetailView, BackButtonListener{
+public class APODDetailFragment extends MvpAppCompatFragment implements DetailView, BackButtonListener {
 
     private static final String ARG = "astronomyLore";
 
     private View view;
+
+//    @Inject
+//    IImageLoader<ImageView> imageLoader;
     private static IImageLoader<ImageView> imageLoader = new GlideImageLoader();
+
 
     private TextView tv_date;
     private TextView tv_title;
@@ -42,10 +47,9 @@ public class APODDetailFragment extends MvpAppCompatFragment implements DetailVi
     DetailPresenter detailPresenter;
 
     @ProvidePresenter
-    DetailPresenter apodDetailFragment(){
+    DetailPresenter apodDetailFragment() {
         final AstronomyLore astronomyLore = getArguments().getParcelable(ARG);
-        Router router = APODApplication.getInstance().getRouter();
-        return new DetailPresenter(router, astronomyLore);
+        return new DetailPresenter(astronomyLore);
     }
 
     public static Fragment newInstance(AstronomyLore astronomyLore) {
@@ -73,15 +77,20 @@ public class APODDetailFragment extends MvpAppCompatFragment implements DetailVi
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_apod_detail, container, false);
 
-        tv_date = (TextView)view.findViewById(R.id.tv_date);
-        tv_explanation = (TextView)view.findViewById(R.id.tv_explanation);
-        tv_title = (TextView)view.findViewById(R.id.tv_title);
-        iv_hdurl = (ImageView)view.findViewById(R.id.iv_hdurl);
-        iv_url = (ImageView)view.findViewById(R.id.iv_url);
+        tv_date = (TextView) view.findViewById(R.id.tv_date);
+        tv_explanation = (TextView) view.findViewById(R.id.tv_explanation);
+        tv_title = (TextView) view.findViewById(R.id.tv_title);
+        iv_hdurl = (ImageView) view.findViewById(R.id.iv_hdurl);
+        iv_url = (ImageView) view.findViewById(R.id.iv_url);
 
         return view;
     }
 
+
+    @Override
+    public void release() {
+        APODApplication.INSTANCE.releaseSearchSubcomponent();
+    }
 
     @Override
     public void setDate(String date) {
@@ -100,12 +109,12 @@ public class APODDetailFragment extends MvpAppCompatFragment implements DetailVi
 
     @Override
     public void setUrl(String url) {
-        imageLoader.loadImage(url,iv_url);
+        imageLoader.loadImage(url, iv_url);
     }
 
     @Override
     public void setHDurl(String hdurl) {
-        imageLoader.loadImage(hdurl,iv_hdurl);
+        imageLoader.loadImage(hdurl, iv_hdurl);
     }
 
 }

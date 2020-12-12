@@ -2,19 +2,22 @@ package com.hw.apod.app;
 
 import android.app.Application;
 
-import com.hw.apod.mvp.model.api.IDataSource;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
-import ru.terrakok.cicerone.Cicerone;
-import ru.terrakok.cicerone.NavigatorHolder;
-import ru.terrakok.cicerone.Router;
+import com.hw.apod.di.AppComponent;
+import com.hw.apod.di.DaggerAppComponent;
+import com.hw.apod.di.module.AppModule;
+import com.hw.apod.di.screens.SearchSubcomponent;
 
 public class APODApplication extends Application {
 
     public static  APODApplication INSTANCE;
 
-    private ApiHolder apiHolder;
+    private AppComponent appComponent;
 
-    private Cicerone<Router> cicerone;
+    @Nullable
+    private SearchSubcomponent searchSubcomponent;
 
     @Override
     public void onCreate() {
@@ -22,27 +25,35 @@ public class APODApplication extends Application {
 
         INSTANCE = this;
 
-        initCicerone();
-        apiHolder = new ApiHolder();
+        appComponent = DaggerAppComponent.builder().appModule(new AppModule(this)).build();
     }
 
     public static APODApplication getInstance(){
         return INSTANCE;
     }
 
-    private void initCicerone() {
-        cicerone = Cicerone.create();
+
+    public AppComponent getAppComponent() {
+        return appComponent;
     }
 
-    public Router getRouter() {
-        return cicerone.getRouter();
+    @NonNull
+    public SearchSubcomponent initSearchSubcomponent(){
+        AppComponent appComp = this.appComponent;
+
+        if (appComp == null) {
+            throw new IllegalStateException("appComponent must be initialized");
+        }
+
+        if (searchSubcomponent == null) {
+            SearchSubcomponent searchSubcomponent = appComp.searchSubcomponent();
+            this.searchSubcomponent = searchSubcomponent;
+        }
+
+        return searchSubcomponent;
     }
 
-    public NavigatorHolder getNavigatorHolder() {
-        return cicerone.getNavigatorHolder();
-    }
-
-    public IDataSource getApi() {
-        return apiHolder.getDataSource();
+    public void releaseSearchSubcomponent(){
+        searchSubcomponent = null;
     }
 }

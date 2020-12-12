@@ -7,4 +7,5 @@ import moxy.viewstate.strategy.alias.AddToEndSingle;
 public interface SearchView extends MvpView {
     void init();
     void updateList();
+    void release();
 }
