@@ -20,6 +20,8 @@ import com.hw.apod.mvp.view.image.GlideImageLoader;
 import com.hw.apod.mvp.view.image.IImageLoader;
 import com.hw.apod.ui.BackButtonListener;
 
+import javax.inject.Inject;
+
 import moxy.MvpAppCompatFragment;
 import moxy.presenter.InjectPresenter;
 import moxy.presenter.ProvidePresenter;
