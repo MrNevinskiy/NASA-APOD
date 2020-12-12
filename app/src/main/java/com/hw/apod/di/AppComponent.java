@@ -4,7 +4,7 @@ import com.hw.apod.di.module.ApiModule;
 import com.hw.apod.di.module.AppModule;
 import com.hw.apod.di.module.CacheModule;
 import com.hw.apod.di.module.CiceroneModule;
-import com.hw.apod.di.screens.SearchSubcomponent;
+import com.hw.apod.di.screens.ScreensSubcomponent;
 import com.hw.apod.mvp.presenter.MainPresenter;
 import com.hw.apod.ui.activity.MainActivity;
 
@@ -23,7 +23,7 @@ import dagger.Component;
 )
 
 public interface AppComponent {
-        SearchSubcomponent searchSubcomponent();
+        ScreensSubcomponent searchSubcomponent();
 
         void inject(MainActivity mainActivity);
         void inject(MainPresenter mainPresenter);

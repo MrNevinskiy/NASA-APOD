@@ -8,7 +8,7 @@ import androidx.annotation.Nullable;
 import com.hw.apod.di.AppComponent;
 import com.hw.apod.di.DaggerAppComponent;
 import com.hw.apod.di.module.AppModule;
-import com.hw.apod.di.screens.SearchSubcomponent;
+import com.hw.apod.di.screens.ScreensSubcomponent;
 
 public class APODApplication extends Application {
 
@@ -17,7 +17,7 @@ public class APODApplication extends Application {
     private AppComponent appComponent;
 
     @Nullable
-    private SearchSubcomponent searchSubcomponent;
+    private ScreensSubcomponent searchSubcomponent;
 
     @Override
     public void onCreate() {
@@ -38,7 +38,7 @@ public class APODApplication extends Application {
     }
 
     @NonNull
-    public SearchSubcomponent initSearchSubcomponent(){
+    public ScreensSubcomponent initSearchSubcomponent(){
         AppComponent appComp = this.appComponent;
 
         if (appComp == null) {
@@ -46,7 +46,7 @@ public class APODApplication extends Application {
         }
 
         if (searchSubcomponent == null) {
-            SearchSubcomponent searchSubcomponent = appComp.searchSubcomponent();
+            ScreensSubcomponent searchSubcomponent = appComp.searchSubcomponent();
             this.searchSubcomponent = searchSubcomponent;
         }
 

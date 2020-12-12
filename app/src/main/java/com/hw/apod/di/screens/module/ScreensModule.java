@@ -12,7 +12,7 @@ import dagger.Module;
 import dagger.Provides;
 
 @Module
-public class SearchModule {
+public class ScreensModule {
 
     @Provides
     IAstronomyLoreCache astronomyLoreCache(Database db){

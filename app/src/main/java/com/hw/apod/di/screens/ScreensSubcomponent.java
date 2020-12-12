@@ -1,21 +1,21 @@
 package com.hw.apod.di.screens;
 
 import com.hw.apod.di.screens.module.ImageModule;
-import com.hw.apod.di.screens.module.SearchModule;
+import com.hw.apod.di.screens.module.ScreensModule;
 import com.hw.apod.mvp.presenter.DetailPresenter;
 import com.hw.apod.mvp.presenter.SearchPresenter;
 import com.hw.apod.ui.fragment.APODDetailFragment;
 
 import dagger.Subcomponent;
 
-@SearchScoup
+@ScreensScoup
 @Subcomponent(
         modules = {
-                SearchModule.class,
+                ScreensModule.class,
                 ImageModule.class
         }
 )
-public interface SearchSubcomponent {
+public interface ScreensSubcomponent {
     void inject(SearchPresenter searchPresenter);
     void inject(DetailPresenter detailPresenter);
     void inject(APODDetailFragment apodDetailFragment);
