@@ -7,6 +7,5 @@ import com.hw.apod.mvp.model.entity.room.dao.LoreDao;
 @androidx.room.Database(entities = {RoomAstronomyLore.class}, version = 1)
 public abstract class Database extends RoomDatabase {
     public static final String DB_NAME = "database.db";
-    private static volatile Database INSTANCE;
     public abstract LoreDao loreDao();
 }

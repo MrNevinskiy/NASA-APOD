@@ -24,7 +24,7 @@ public interface LoreDao {
     void delete(List<RoomAstronomyLore> roomAstronomyLore);
 
     @Query("SELECT * FROM RoomAstronomyLore")
-    RoomAstronomyLore getAll();
+    List<RoomAstronomyLore> getAll();
 
     @Query("SELECT * FROM RoomAstronomyLore WHERE date = :date LIMIT 1")
     RoomAstronomyLore findByDate(String date);

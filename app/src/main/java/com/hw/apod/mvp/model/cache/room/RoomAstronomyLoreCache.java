@@ -20,43 +20,26 @@ public class RoomAstronomyLoreCache implements IAstronomyLoreCache {
         this.db = db;
     }
 
-
     @Override
-    public Single<AstronomyLore> getAstronomyLore() {
+    public Single<List<AstronomyLore>> getAstronomyLore() {
         return Single.fromCallable(() -> {
-            RoomAstronomyLore roomLore = db.loreDao().getAll();
+            List<RoomAstronomyLore> roomLore = db.loreDao().getAll();
 
-            AstronomyLore astronomyLore = new AstronomyLore(
-                    roomLore.getDate(),
-                    roomLore.getExplanation(),
-                    roomLore.getHdurl(),
-                    roomLore.getTitle(),
-                    roomLore.getUrl());
+            List<AstronomyLore> lore = new ArrayList<>();
 
-            return astronomyLore;
+            for (RoomAstronomyLore roomAstronomyLore: roomLore) {
+                AstronomyLore astronomyLore = new AstronomyLore(
+                        roomAstronomyLore.getDate(),
+                        roomAstronomyLore.getExplanation(),
+                        roomAstronomyLore.getHdurl(),
+                        roomAstronomyLore.getTitle(),
+                        roomAstronomyLore.getUrl());
+
+                lore.add(astronomyLore);
+            }
+            return lore;
         });
     }
-
-//    @Override
-//    public Single<AstronomyLore> getAstronomyLore() {
-//        return Single.fromCallable(() -> {
-//            List<RoomAstronomyLore> roomLore = db.loreDao().getAll();
-//
-//            List<AstronomyLore> lore = new ArrayList<>();
-//
-//            for (RoomAstronomyLore roomAstronomyLore: roomLore) {
-//                AstronomyLore astronomyLore = new AstronomyLore(
-//                        roomAstronomyLore.getDate(),
-//                        roomAstronomyLore.getExplanation(),
-//                        roomAstronomyLore.getHdurl(),
-//                        roomAstronomyLore.getTitle(),
-//                        roomAstronomyLore.getUrl());
-//
-//                lore.add(astronomyLore);
-//            }
-//            return lore;
-//        });
-//    }
 
     @Override
     public Completable putAstronomyLore(AstronomyLore astronomyLore) {

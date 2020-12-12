@@ -12,14 +12,11 @@ public class RoomAstronomyLore {
     @NonNull
     private String date;
 
-    private String title;
-    private String explanation;
-    private String hdurl;
-    private String url;
+    public String title;
+    public String explanation;
+    public String hdurl;
+    public String url;
 
-    public RoomAstronomyLore(){
-
-    }
 
     public RoomAstronomyLore(@NonNull String date, String title, String explanation, String hdurl, String url) {
         this.date = date;
@@ -49,24 +46,5 @@ public class RoomAstronomyLore {
     public String getUrl() {
         return url;
     }
-
-    public void setDate(@NonNull String date) {
-        this.date = date;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public void setExplanation(String explanation) {
-        this.explanation = explanation;
-    }
-
-    public void setHdurl(String hdurl) {
-        this.hdurl = hdurl;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
+    
 }
