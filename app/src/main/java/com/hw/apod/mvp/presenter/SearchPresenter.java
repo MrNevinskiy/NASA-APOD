@@ -3,6 +3,7 @@ package com.hw.apod.mvp.presenter;
 import android.util.Log;
 
 import com.hw.apod.BuildConfig;
+import com.hw.apod.app.APODApplication;
 import com.hw.apod.mvp.model.entity.AstronomyLore;
 import com.hw.apod.mvp.model.repo.IAstronomyLoreRepo;
 import com.hw.apod.mvp.presenter.list.ISearchListPresenter;
@@ -14,6 +15,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import io.reactivex.rxjava3.core.Scheduler;
 import moxy.MvpPresenter;
 import ru.terrakok.cicerone.Router;
@@ -23,14 +26,17 @@ public class SearchPresenter extends MvpPresenter<SearchView> {
 
     private static final boolean VERBOSE = true;
 
-    private Router router;
-    private final Scheduler scheduler;
-    private IAstronomyLoreRepo astronomyLoreRepo;
+    @Inject
+    Router router;
 
-    public SearchPresenter(Scheduler scheduler, Router router, IAstronomyLoreRepo astronomyLoreRepo) {
-        this.scheduler = scheduler;
-        this.router = router;
-        this.astronomyLoreRepo = astronomyLoreRepo;
+    @Inject
+    Scheduler scheduler;
+
+    @Inject
+    IAstronomyLoreRepo astronomyLoreRepo;
+
+    public SearchPresenter() {
+        APODApplication.INSTANCE.initScreensSubcomponent().inject(this);
     }
 
     private class DateListPresenter implements ISearchListPresenter {
@@ -48,7 +54,7 @@ public class SearchPresenter extends MvpPresenter<SearchView> {
         @Override
         public void bindView(SearchItemView view) {
             AstronomyLore astronomyLore = lore.get(view.getPos());
-            view.setDate(astronomyLore.getDate());
+            view.setDate(astronomyLore.getTitle());
         }
 
         @Override
@@ -67,7 +73,18 @@ public class SearchPresenter extends MvpPresenter<SearchView> {
     protected void onFirstViewAttach() {
         super.onFirstViewAttach();
         getViewState().init();
-        loadData(" ");
+        loadDataCache();
+    }
+
+    public void loadDataCache() {
+        astronomyLoreRepo.getLoreCache().observeOn(scheduler).subscribe(lore ->{
+            dateListPresenter.lore.clear();
+            dateListPresenter.lore.addAll(lore);
+            getViewState().updateList();
+        }, (e) -> {
+            Log.w(TAG, "Error" + e.getMessage());
+        });
+
     }
 
     public void loadData(String date) {
@@ -75,6 +92,7 @@ public class SearchPresenter extends MvpPresenter<SearchView> {
         astronomyLoreRepo.getLore(BuildConfig.NASASecAPIKEY, date).observeOn(scheduler).subscribe(lore -> {
             dateListPresenter.lore.addAll(Collections.singleton(lore));
             getViewState().updateList();
+            router.navigateTo(new Screens.APODDetailScreen(lore));
         }, (e) -> {
             Log.w(TAG, "Error" + e.getMessage());
         });

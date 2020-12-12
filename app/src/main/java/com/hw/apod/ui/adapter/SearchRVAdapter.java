@@ -17,7 +17,7 @@ public class SearchRVAdapter extends RecyclerView.Adapter<SearchRVAdapter.ViewHo
 
     private ISearchListPresenter presenter;
 
-    public SearchRVAdapter(ISearchListPresenter presenter){
+    public SearchRVAdapter(ISearchListPresenter presenter) {
         this.presenter = presenter;
     }
 
@@ -38,12 +38,7 @@ public class SearchRVAdapter extends RecyclerView.Adapter<SearchRVAdapter.ViewHo
     public void onBindViewHolder(@NonNull SearchRVAdapter.ViewHolder holder, int position) {
         holder.position = position;
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                presenter.onItemClick(holder);
-            }
-        });
+        holder.itemView.setOnClickListener(view -> presenter.onItemClick(holder));
 
         presenter.bindView(holder);
     }
@@ -53,7 +48,7 @@ public class SearchRVAdapter extends RecyclerView.Adapter<SearchRVAdapter.ViewHo
         return presenter.getCount();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder implements SearchItemView{
+    public static class ViewHolder extends RecyclerView.ViewHolder implements SearchItemView {
         TextView date;
         int position = -1;
 

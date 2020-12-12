@@ -1,5 +1,7 @@
 package com.hw.apod.mvp.model.cache.room;
 
+import android.util.Log;
+
 import com.hw.apod.mvp.model.cache.IAstronomyLoreCache;
 import com.hw.apod.mvp.model.entity.AstronomyLore;
 import com.hw.apod.mvp.model.entity.room.Database;
@@ -20,23 +22,27 @@ public class RoomAstronomyLoreCache implements IAstronomyLoreCache {
         this.db = db;
     }
 
-
     @Override
-    public Single<AstronomyLore> getAstronomyLore() {
+    public Single<List<AstronomyLore>> getAstronomyLore() {
         return Single.fromCallable(() -> {
-            RoomAstronomyLore roomLore = db.loreDao().getAll();
+            List<RoomAstronomyLore> roomLore = db.loreDao().getAll();
 
-            AstronomyLore astronomyLore = new AstronomyLore(
-                    roomLore.getDate(),
-                    roomLore.getExplanation(),
-                    roomLore.getHdurl(),
-                    roomLore.getTitle(),
-                    roomLore.getUrl());
+            List<AstronomyLore> lore = new ArrayList<>();
 
-            return astronomyLore;
+            for (RoomAstronomyLore roomAstronomyLore: roomLore) {
+                AstronomyLore astronomyLore = new AstronomyLore(
+                        roomAstronomyLore.getDate(),
+                        roomAstronomyLore.getExplanation(),
+                        roomAstronomyLore.getHdurl(),
+                        roomAstronomyLore.getTitle(),
+                        roomAstronomyLore.getUrl());
+
+                lore.add(astronomyLore);
+                Log.d("RoomAstronomyLoreCache ",roomAstronomyLore.getDate());
+            }
+            return lore;
         });
     }
-
 
     @Override
     public Completable putAstronomyLore(AstronomyLore astronomyLore) {
@@ -50,6 +56,8 @@ public class RoomAstronomyLoreCache implements IAstronomyLoreCache {
                     astronomyLore.getExplanation(),
                     astronomyLore.getHdurl(),
                     astronomyLore.getUrl());
+
+            Log.d("RoomAstronomyLoreCache",astronomyLore.getDate());
 
             roomLore.add(roomAstronomyLore);
 

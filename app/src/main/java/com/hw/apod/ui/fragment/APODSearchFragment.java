@@ -15,21 +15,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.hw.apod.R;
 import com.hw.apod.app.APODApplication;
-import com.hw.apod.mvp.model.cache.room.RoomAstronomyLoreCache;
-import com.hw.apod.mvp.model.entity.room.Database;
-import com.hw.apod.mvp.model.repo.IAstronomyLoreRepo;
-import com.hw.apod.mvp.model.repo.RetrofitAstronomyLoreRepo;
 import com.hw.apod.mvp.presenter.SearchPresenter;
 import com.hw.apod.mvp.view.SearchView;
 import com.hw.apod.ui.BackButtonListener;
 import com.hw.apod.ui.adapter.SearchRVAdapter;
-import com.hw.apod.ui.network.AndroidNetworkStatus;
 
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import moxy.MvpAppCompatFragment;
 import moxy.presenter.InjectPresenter;
 import moxy.presenter.ProvidePresenter;
-import ru.terrakok.cicerone.Router;
 
 public class APODSearchFragment extends MvpAppCompatFragment implements SearchView, BackButtonListener {
 
@@ -47,15 +40,6 @@ public class APODSearchFragment extends MvpAppCompatFragment implements SearchVi
     SearchPresenter detailPresenter;
 
     @ProvidePresenter
-    SearchPresenter apodDetailFragment(){
-        IAstronomyLoreRepo astronomyLoreRepo = new RetrofitAstronomyLoreRepo(
-                APODApplication.INSTANCE.getApi(),
-                new AndroidNetworkStatus(),
-                new RoomAstronomyLoreCache(Database.getInstance()));
-        Router router = APODApplication.getInstance().getRouter();
-        return new SearchPresenter(AndroidSchedulers.mainThread(), router, astronomyLoreRepo);
-    }
-
     public static APODSearchFragment getInstance(){
         APODSearchFragment fragment = new APODSearchFragment();
         return fragment;
@@ -87,6 +71,11 @@ public class APODSearchFragment extends MvpAppCompatFragment implements SearchVi
     @Override
     public void updateList() {
         adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void release() {
+        APODApplication.INSTANCE.releaseScreensSubcomponent();
     }
 
     public void initRV(){
