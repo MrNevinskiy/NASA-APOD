@@ -1,5 +1,7 @@
 package com.hw.apod.mvp.model.cache.room;
 
+import android.util.Log;
+
 import com.hw.apod.mvp.model.cache.IAstronomyLoreCache;
 import com.hw.apod.mvp.model.entity.AstronomyLore;
 import com.hw.apod.mvp.model.entity.room.Database;
@@ -36,6 +38,7 @@ public class RoomAstronomyLoreCache implements IAstronomyLoreCache {
                         roomAstronomyLore.getUrl());
 
                 lore.add(astronomyLore);
+                Log.d("RoomAstronomyLoreCache ",roomAstronomyLore.getDate());
             }
             return lore;
         });
@@ -53,6 +56,8 @@ public class RoomAstronomyLoreCache implements IAstronomyLoreCache {
                     astronomyLore.getExplanation(),
                     astronomyLore.getHdurl(),
                     astronomyLore.getUrl());
+
+            Log.d("RoomAstronomyLoreCache",astronomyLore.getDate());
 
             roomLore.add(roomAstronomyLore);
 

@@ -37,7 +37,6 @@ public class APODDetailFragment extends MvpAppCompatFragment implements DetailVi
     private TextView tv_date;
     private TextView tv_title;
     private TextView tv_explanation;
-    private ImageView iv_hdurl;
     private ImageView iv_url;
 
     @InjectPresenter
@@ -81,7 +80,6 @@ public class APODDetailFragment extends MvpAppCompatFragment implements DetailVi
         tv_date = (TextView) view.findViewById(R.id.tv_date);
         tv_explanation = (TextView) view.findViewById(R.id.tv_explanation);
         tv_title = (TextView) view.findViewById(R.id.tv_title);
-        iv_hdurl = (ImageView) view.findViewById(R.id.iv_hdurl);
         iv_url = (ImageView) view.findViewById(R.id.iv_url);
 
         return view;
@@ -111,11 +109,6 @@ public class APODDetailFragment extends MvpAppCompatFragment implements DetailVi
     @Override
     public void setUrl(String url) {
         imageLoader.loadImage(url, iv_url);
-    }
-
-    @Override
-    public void setHDurl(String hdurl) {
-        imageLoader.loadImage(hdurl, iv_hdurl);
     }
 
 }

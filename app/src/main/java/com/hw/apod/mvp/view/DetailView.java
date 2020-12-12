@@ -9,6 +9,5 @@ public interface DetailView extends MvpView {
     void setTitle(String title);
     void setExplanation(String explanation);
     void setUrl(String url);
-    void setHDurl(String hdurl);
     void release();
 }

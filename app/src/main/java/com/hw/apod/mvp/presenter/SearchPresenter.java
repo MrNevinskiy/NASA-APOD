@@ -54,7 +54,7 @@ public class SearchPresenter extends MvpPresenter<SearchView> {
         @Override
         public void bindView(SearchItemView view) {
             AstronomyLore astronomyLore = lore.get(view.getPos());
-            view.setDate(astronomyLore.getDate());
+            view.setDate(astronomyLore.getTitle());
         }
 
         @Override

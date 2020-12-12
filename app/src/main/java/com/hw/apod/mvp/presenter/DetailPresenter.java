@@ -28,13 +28,11 @@ public class DetailPresenter extends MvpPresenter<DetailView> {
         String date = astronomyLore.getDate();
         String title = astronomyLore.getTitle();
         String explanation = astronomyLore.getExplanation();
-        String hdurl = astronomyLore.getHdurl();
         String url = astronomyLore.getUrl();
 
         getViewState().setDate(date != null? date : "");
         getViewState().setExplanation(explanation != null? explanation : "");
         getViewState().setTitle(title != null? title : "");
-        getViewState().setHDurl(hdurl);
         getViewState().setUrl(url);
     }
 
