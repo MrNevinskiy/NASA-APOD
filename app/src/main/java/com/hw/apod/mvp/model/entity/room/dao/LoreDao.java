@@ -26,7 +26,4 @@ public interface LoreDao {
     @Query("SELECT * FROM RoomAstronomyLore")
     List<RoomAstronomyLore> getAll();
 
-    @Query("SELECT * FROM RoomAstronomyLore WHERE date = :date LIMIT 1")
-    RoomAstronomyLore findByDate(String date);
-
 }

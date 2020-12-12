@@ -16,5 +16,10 @@ import dagger.Subcomponent;
 public interface ScreensSubcomponent {
     void inject(SearchPresenter searchPresenter);
     void inject(DetailPresenter detailPresenter);
+
+    /**
+     * Заинектил его для того чтобы создать Glide
+     * @param apodDetailFragment
+     */
     void inject(APODDetailFragment apodDetailFragment);
 }
