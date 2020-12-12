@@ -75,7 +75,7 @@ public class APODSearchFragment extends MvpAppCompatFragment implements SearchVi
 
     @Override
     public void release() {
-        APODApplication.INSTANCE.releaseSearchSubcomponent();
+        APODApplication.INSTANCE.releaseScreensSubcomponent();
     }
 
     public void initRV(){

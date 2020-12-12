@@ -36,7 +36,7 @@ public class SearchPresenter extends MvpPresenter<SearchView> {
     IAstronomyLoreRepo astronomyLoreRepo;
 
     public SearchPresenter() {
-        APODApplication.INSTANCE.initSearchSubcomponent().inject(this);
+        APODApplication.INSTANCE.initScreensSubcomponent().inject(this);
     }
 
     private class DateListPresenter implements ISearchListPresenter {

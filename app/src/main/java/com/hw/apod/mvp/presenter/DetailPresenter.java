@@ -18,7 +18,7 @@ public class DetailPresenter extends MvpPresenter<DetailView> {
 
     public DetailPresenter(AstronomyLore astronomyLore) {
         this.astronomyLore = astronomyLore;
-        APODApplication.INSTANCE.initSearchSubcomponent().inject(this);
+        APODApplication.INSTANCE.initScreensSubcomponent().inject(this);
     }
 
     @Override

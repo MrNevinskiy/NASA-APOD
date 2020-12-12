@@ -17,7 +17,7 @@ public class APODApplication extends Application {
     private AppComponent appComponent;
 
     @Nullable
-    private ScreensSubcomponent searchSubcomponent;
+    private ScreensSubcomponent screensSubcomponent;
 
     @Override
     public void onCreate() {
@@ -38,22 +38,22 @@ public class APODApplication extends Application {
     }
 
     @NonNull
-    public ScreensSubcomponent initSearchSubcomponent(){
+    public ScreensSubcomponent initScreensSubcomponent(){
         AppComponent appComp = this.appComponent;
 
         if (appComp == null) {
             throw new IllegalStateException("appComponent must be initialized");
         }
 
-        if (searchSubcomponent == null) {
-            ScreensSubcomponent searchSubcomponent = appComp.searchSubcomponent();
-            this.searchSubcomponent = searchSubcomponent;
+        if (screensSubcomponent == null) {
+            ScreensSubcomponent screensSubcomponent = appComp.searchSubcomponent();
+            this.screensSubcomponent = screensSubcomponent;
         }
 
-        return searchSubcomponent;
+        return screensSubcomponent;
     }
 
-    public void releaseSearchSubcomponent(){
-        searchSubcomponent = null;
+    public void releaseScreensSubcomponent(){
+        screensSubcomponent = null;
     }
 }
