@@ -26,4 +26,7 @@ public interface LoreDao {
     @Query("SELECT * FROM RoomAstronomyLore")
     List<RoomAstronomyLore> getAll();
 
+    @Query("SELECT * FROM RoomAstronomyLore")
+    RoomAstronomyLore getSingle();
+
 }

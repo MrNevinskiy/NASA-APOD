@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Астрономическая картина дня</string>
+    <string name="search">Поиск</string>
+    <string name="Date">Дата</string>
+    <string name="select_a_date_and_click_search">Выберите дату и нажмите поиск</string>
+    <string name="request_history">История поиска:</string>
+    <string name="title">Заглавие</string>
+    <string name="date">Дата</string>
+    <string name="explanation">Объяснение</string>
+</resources>

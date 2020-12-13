@@ -12,7 +12,6 @@ import com.hw.apod.mvp.view.list.SearchItemView;
 import com.hw.apod.ui.navigation.Screens;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -90,7 +89,7 @@ public class SearchPresenter extends MvpPresenter<SearchView> {
     public void loadData(String date) {
         Log.d(TAG, BuildConfig.NASASecAPIKEY + " - " + date);
         astronomyLoreRepo.getLore(BuildConfig.NASASecAPIKEY, date).observeOn(scheduler).subscribe(lore -> {
-            dateListPresenter.lore.addAll(Collections.singleton(lore));
+            dateListPresenter.lore.add(lore);
             getViewState().updateList();
             router.navigateTo(new Screens.APODDetailScreen(lore));
         }, (e) -> {

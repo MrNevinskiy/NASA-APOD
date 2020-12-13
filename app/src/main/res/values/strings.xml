@@ -2,4 +2,9 @@
     <string name="app_name">Astronomy Picture of the Day</string>
     <string name="search">Search</string>
     <string name="Date">date</string>
+    <string name="select_a_date_and_click_search">Select a date and click search</string>
+    <string name="request_history">Request history:</string>
+    <string name="title">title</string>
+    <string name="date">date</string>
+    <string name="explanation">explanation</string>
 </resources>

@@ -62,9 +62,9 @@ public class APODSearchFragment extends MvpAppCompatFragment implements SearchVi
 
     @Override
     public void init() {
+        initRV();
         initCalendarView();
         initSearchButton();
-        initRV();
     }
 
 

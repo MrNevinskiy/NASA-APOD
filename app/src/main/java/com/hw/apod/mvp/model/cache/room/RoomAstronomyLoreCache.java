@@ -15,6 +15,7 @@ import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class RoomAstronomyLoreCache implements IAstronomyLoreCache {
+    private String TAG = RoomAstronomyLoreCache.class.getSimpleName();
 
     private final Database db;
 
@@ -38,7 +39,9 @@ public class RoomAstronomyLoreCache implements IAstronomyLoreCache {
                         roomAstronomyLore.getUrl());
 
                 lore.add(astronomyLore);
-                Log.d("RoomAstronomyLoreCache ",roomAstronomyLore.getDate());
+
+                Log.d(TAG,roomAstronomyLore.getTitle());
+
             }
             return lore;
         });
@@ -48,8 +51,6 @@ public class RoomAstronomyLoreCache implements IAstronomyLoreCache {
     public Completable putAstronomyLore(AstronomyLore astronomyLore) {
         return Completable.fromAction(() -> {
 
-            List<RoomAstronomyLore> roomLore = new ArrayList<>();
-
             RoomAstronomyLore roomAstronomyLore = new RoomAstronomyLore(
                     astronomyLore.getDate(),
                     astronomyLore.getTitle(),
@@ -57,11 +58,11 @@ public class RoomAstronomyLoreCache implements IAstronomyLoreCache {
                     astronomyLore.getHdurl(),
                     astronomyLore.getUrl());
 
-            Log.d("RoomAstronomyLoreCache",astronomyLore.getDate());
+            Log.d(TAG,astronomyLore.getDate());
 
-            roomLore.add(roomAstronomyLore);
+            db.loreDao().insert(roomAstronomyLore);
 
-            db.loreDao().insert(roomLore);
+            Log.d(TAG,db.loreDao().getSingle().title);
 
         }).subscribeOn(Schedulers.io());
     }
