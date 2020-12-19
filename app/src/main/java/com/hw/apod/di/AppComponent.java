@@ -5,6 +5,7 @@ import com.hw.apod.di.module.AppModule;
 import com.hw.apod.di.module.CacheModule;
 import com.hw.apod.di.module.CiceroneModule;
 import com.hw.apod.di.module.ImageModule;
+import com.hw.apod.di.module.LogModule;
 import com.hw.apod.di.screens.ScreensSubcomponent;
 import com.hw.apod.mvp.presenter.MainPresenter;
 import com.hw.apod.ui.activity.MainActivity;
@@ -20,7 +21,8 @@ import dagger.Component;
                 AppModule.class,
                 CacheModule.class,
                 CiceroneModule.class,
-                ImageModule.class
+                ImageModule.class,
+                LogModule.class
         }
 )
 

@@ -32,6 +32,6 @@ public class RetrofitAstronomyLoreRepo implements IAstronomyLoreRepo {
 
     @Override
     public Single<List<AstronomyLore>> getLoreCache() {
-        return cache.getAstronomyLore();
+        return cache.getAstronomyLore().subscribeOn(Schedulers.io());
     }
 }

@@ -15,8 +15,6 @@ public interface LoreDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(RoomAstronomyLore roomAstronomyLore);
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insert(List<RoomAstronomyLore> roomAstronomyLore);
 
     @Delete
     void delete(RoomAstronomyLore roomAstronomyLore);
