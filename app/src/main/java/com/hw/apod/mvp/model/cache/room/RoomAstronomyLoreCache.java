@@ -1,7 +1,5 @@
 package com.hw.apod.mvp.model.cache.room;
 
-import android.util.Log;
-
 import com.hw.apod.mvp.model.cache.IAstronomyLoreCache;
 import com.hw.apod.mvp.model.entity.AstronomyLore;
 import com.hw.apod.mvp.model.entity.room.Database;
@@ -15,7 +13,6 @@ import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class RoomAstronomyLoreCache implements IAstronomyLoreCache {
-    private String TAG = RoomAstronomyLoreCache.class.getSimpleName();
 
     private final Database db;
 
@@ -40,8 +37,6 @@ public class RoomAstronomyLoreCache implements IAstronomyLoreCache {
 
                 lore.add(astronomyLore);
 
-                Log.d(TAG,roomAstronomyLore.getTitle());
-
             }
             return lore;
         });
@@ -58,11 +53,7 @@ public class RoomAstronomyLoreCache implements IAstronomyLoreCache {
                     astronomyLore.getHdurl(),
                     astronomyLore.getUrl());
 
-            Log.d(TAG,astronomyLore.getDate());
-
             db.loreDao().insert(roomAstronomyLore);
-
-            Log.d(TAG,db.loreDao().getSingle().title);
 
         }).subscribeOn(Schedulers.io());
     }
