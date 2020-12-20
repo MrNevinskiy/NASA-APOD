@@ -95,7 +95,7 @@ public class APODSearchFragment extends MvpAppCompatFragment implements SearchVi
                     .append(year).append("-")
                     .append(month + 1).append("-")
                     .append(dayOfMonth).toString();
-            Toast.makeText(getContext().getApplicationContext(), date, Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext().getApplicationContext(), date, Toast.LENGTH_SHORT).show();
         });
     }
 }
